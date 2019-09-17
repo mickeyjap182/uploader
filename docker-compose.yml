@@ -1,0 +1,32 @@
+# This file is a build tool for docker
+#
+# if you use docker, you can choose docker build tool.
+# In this case, you should do following command.
+#
+# [operations]
+# cd <this directory>
+# docker-compose up -d
+version: '3'
+
+services:
+  python:
+    build:
+      context: .
+      dockerfile: ./python/Dockerfile
+    tty: true
+    ports:
+      - "10080:80"
+    volumes:
+      - ./python/analyze_service:/var/www/
+    restart: always
+  # mysql:
+  #   image: mysql:8.0.14
+  #   restart: always
+  #   ports:
+  #     - "13306:3306"
+  #   volumes:
+  #     - ./mysql/.data/db:/var/lib/mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_USER: service
+  #     MYSQL_PASSWORD: pass
